@@ -1,5 +1,5 @@
 # how to run the code
-# python3 create_features_for_pos_tagging.py --input Input_File_Path --output Output_File_Path
+# python3 create_features_for_pos_tagging_on_sentences_conll_format.py --input Input_File_Path --output Output_File_Path
 # put all the files which you want to POS Tag (test) in a folder, input should be a folder
 import argparse
 import os
@@ -13,31 +13,36 @@ def read_file_and_find_features(file_path):
     features_string = ''
     with open(file_path, 'r', encoding='utf-8') as file_read:
         lines_read = file_read.readlines()
-        features_string += find_features_from_sentences(lines_read)
+        features_string += find_features_from_lines(lines_read)
         return features_string
 
 
-def find_features_from_sentences(sentences):
+def find_features_from_lines(lines):
     '''
-    :param sentences: Sentences read from file
+    :param lines: lines read from file
     :return features: Features of all tokens for each sentence combined for all the sentences
     '''
     prefix_len = 4
     suffix_len = 7
     features = ''
-    for sentence in sentences:
-        sentence_features = ''
-        if sentence.strip():
-            tokens_split = [token for token in sentence.strip().split() if token.strip()]
-            for token in tokens_split:
-                sentence_features += token + '\t'
-                for i in range(1, prefix_len + 1):
-                    sentence_features += affix_feats(token, i, 0) + '\t'
-                for i in range(1, suffix_len + 1):
-                    sentence_features += affix_feats(token, i, 1) + '\t'
-                sentence_features = sentence_features + 'LESS\n' if len(token) <= 4 else sentence_features + 'MORE\n'
-        if sentence_features.strip():
-            features += sentence_features + '\n'
+    for line in lines:
+        token_features = ''
+        line = line.strip()
+        if line:
+            token = line
+            token_features += token + '\t'
+            for i in range(1, prefix_len + 1):
+                token_features += affix_feats(token, i, 0) + '\t'
+            for i in range(1, suffix_len + 1):
+                token_features += affix_feats(token, i, 1) + '\t'
+            token_features = token_features + 'LESS\n' if len(token) <= 4 else token_features + 'MORE\n'
+            if token_features.strip():
+                features += token_features
+        else:
+            features += '\n'
+    if token_features:
+        features += '\n'
+        token_features = ''
     return features
 
 
