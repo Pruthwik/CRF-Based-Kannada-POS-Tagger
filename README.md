@@ -14,3 +14,5 @@
   journal={arXiv preprint arXiv:1808.03175},\
   year={2018}\
 }
+### Which dataset was the model trained on?
+The POS model was trained on Kannada Treebank (development of the treebank was funded by MeitY, Govt. of India) which can be found from here http://ltrc.iiit.ac.in/showfile.php?filename=downloads/kolhi/
