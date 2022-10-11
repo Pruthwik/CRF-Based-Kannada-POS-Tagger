@@ -8,9 +8,9 @@
 ### format: conll or raw (type conll for conll format file, type raw for raw sentences)
 ### Give absolute paths for all the paths (relative path may throw an error)
 ### How do I cite this work?
-@article{todi2018building,
-  title={Building a kannada pos tagger using machine learning and neural network models},
-  author={Todi, Ketan Kumar and Mishra, Pruthwik and Sharma, Dipti Misra},
-  journal={arXiv preprint arXiv:1808.03175},
-  year={2018}
+@article{todi2018building,\
+  title={Building a kannada pos tagger using machine learning and neural network models},\
+  author={Todi, Ketan Kumar and Mishra, Pruthwik and Sharma, Dipti Misra},\
+  journal={arXiv preprint arXiv:1808.03175},\
+  year={2018}\
 }
